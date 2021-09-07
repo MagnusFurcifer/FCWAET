@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/shotgun_fire.ogg-f37bbe5eaeb6c3f6482fb6b21f9a57c9.oggstr"
+
+[deps]
+
+source_file="res://Scenes/weapons/shotgun/sfx/shotgun_fire.ogg"
+dest_files=[ "res://.import/shotgun_fire.ogg-f37bbe5eaeb6c3f6482fb6b21f9a57c9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

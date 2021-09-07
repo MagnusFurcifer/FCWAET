@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/EndScreen/assets/Writhing In Pain.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/EndScreen/EndScreen.gd" type="Script" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+
+[node name="End Screen" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="OmniLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.841614, 0.540079, 0, -0.540079, 0.841614, 0, 10.6438, 17.8517 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.969821, 0.243818, 0, -0.243818, 0.969821, 0, 11.6779, 22.2464 )
+
+[node name="Control" type="Control" parent="Camera"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Camera/Control"]
+margin_left = 222.0
+margin_top = 10.0
+margin_right = 351.0
+margin_bottom = 40.0
+rect_scale = Vector2( 5.08, 6.56 )
+text = "CONGRATULATIONS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Camera/Control"]
+margin_left = 389.0
+margin_top = 101.0
+margin_right = 440.0
+margin_bottom = 115.0
+text = "You finished the game. I hope you had fun!"
+
+[node name="Label3" type="Label" parent="Camera/Control"]
+margin_left = 383.0
+margin_top = 532.0
+margin_right = 667.0
+margin_bottom = 546.0
+rect_scale = Vector2( 2.50909, 2 )
+text = "Press Enter to go back to Title"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Times" type="Label" parent="Camera/Control"]
+margin_left = 35.2778
+margin_top = 148.671
+margin_right = 78.2778
+margin_bottom = 162.671
+text = "Times:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level1" type="Label" parent="Camera/Control"]
+margin_left = 35.2778
+margin_top = 167.57
+margin_right = 78.2778
+margin_bottom = 181.57
+text = "Level 1:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level1_data" type="Label" parent="Camera/Control"]
+margin_left = 89.4544
+margin_top = 167.57
+margin_right = 139.454
+margin_bottom = 181.57
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level2" type="Label" parent="Camera/Control"]
+margin_left = 35.2778
+margin_top = 188.988
+margin_right = 85.2778
+margin_bottom = 202.988
+text = "Level 2:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level2_data" type="Label" parent="Camera/Control"]
+margin_left = 94.4941
+margin_top = 188.988
+margin_right = 144.494
+margin_bottom = 202.988
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level3" type="Label" parent="Camera/Control"]
+margin_left = 35.2778
+margin_top = 209.147
+margin_right = 85.2778
+margin_bottom = 223.147
+text = "Level 3:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level3_data" type="Label" parent="Camera/Control"]
+margin_left = 90.7143
+margin_top = 209.147
+margin_right = 140.714
+margin_bottom = 223.147
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Writhing In Pain" parent="." instance=ExtResource( 1 )]

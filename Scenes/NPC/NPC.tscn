@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/NPC/NPC.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/NPC/scenes/npc_model.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/NPC/assets/hit.ogg" type="AudioStream" id=3]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+height = 2.0
+
+[sub_resource type="CylinderShape" id=2]
+radius = 11.8633
+height = 0.155897
+
+[sub_resource type="CylinderShape" id=3]
+radius = 2.74675
+height = 0.473028
+
+[sub_resource type="SphereShape" id=4]
+radius = 0.219978
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 1, 0.00784314, 0.00784314, 1 )
+
+[sub_resource type="SphereMesh" id=6]
+material = SubResource( 5 )
+radius = 0.05
+height = 0.1
+
+[node name="NPC" type="KinematicBody" groups=[
+"NPC",
+"shootable",
+]]
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="slope_ray" type="RayCast" parent="CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.505235, 0.569701 )
+enabled = true
+cast_to = Vector3( 0, 0, 1 )
+
+[node name="head" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.12357, 0, 0, 0, 1, 0, 1.61042, 0 )
+
+[node name="detect" type="Area" parent="head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.284287, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="head/detect"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.905405, 0 )
+shape = SubResource( 2 )
+
+[node name="attack" type="Area" parent="head"]
+
+[node name="CollisionShape" type="CollisionShape" parent="head/attack"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.905239, 0 )
+shape = SubResource( 3 )
+
+[node name="head_collision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.5035, 0, 0, 0, 1.15796, 0, 1.58269, 0 )
+shape = SubResource( 4 )
+
+[node name="NPCModel" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.198406, 0, -1.73452e-08, 0, 0.198406, 0, 1.73452e-08, 0, -0.198406, 0, -1.20838, 0 )
+
+[node name="PathUpdateTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="gun_shot" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.717078, -0.0122173 )
+emitting = false
+amount = 32
+lifetime = 0.9
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource( 6 )
+spread = 180.0
+initial_velocity = 2.0
+angular_velocity = 46.45
+linear_accel = 2.15
+radial_accel = 5.36
+
+[node name="hitfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="deathtimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[connection signal="body_entered" from="head/detect" to="." method="_on_detect_body_entered"]
+[connection signal="body_entered" from="head/attack" to="." method="_on_attack_body_entered"]
+[connection signal="body_exited" from="head/attack" to="." method="_on_attack_body_exited"]
+[connection signal="timeout" from="PathUpdateTimer" to="." method="_on_PathUpdateTimer_timeout"]
+[connection signal="timeout" from="deathtimer" to="." method="_on_deathtimer_timeout"]
